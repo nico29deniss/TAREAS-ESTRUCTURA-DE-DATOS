@@ -1,33 +1,46 @@
 using System;
 
+class ContadorVocales
+{
+    public string Palabra { get; set; }
+
+    public ContadorVocales(string palabra)
+    {
+        Palabra = palabra.ToLower(); // Convertir a minúsculas
+    }
+
+    public void ContarVocales()
+    {
+        int aCount = 0, eCount = 0, iCount = 0, oCount = 0, uCount = 0;
+
+        foreach (char letra in Palabra)
+        {
+            switch (letra)
+            {
+                case 'a': aCount++; break;
+                case 'e': eCount++; break;
+                case 'i': iCount++; break;
+                case 'o': oCount++; break;
+                case 'u': uCount++; break;
+            }
+        }
+
+        Console.WriteLine($"A: {aCount}");
+        Console.WriteLine($"E: {eCount}");
+        Console.WriteLine($"I: {iCount}");
+        Console.WriteLine($"O: {oCount}");
+        Console.WriteLine($"U: {uCount}");
+    }
+}
+
 class Program
 {
     static void Main(string[] args)
     {
-        // Pide al usuario una palabra
         Console.Write("Ingrese una palabra: ");
         string palabra = Console.ReadLine();
 
-        // Contar las veces que cada vocal aparece
-        int[] conteoVocales = new int[5]; // a, e, i, o, u
-
-        foreach (char c in palabra.ToLower())
-        {
-            switch (c)
-            {
-                case 'a': conteoVocales[0]++; break;
-                case 'e': conteoVocales[1]++; break;
-                case 'i': conteoVocales[2]++; break;
-                case 'o': conteoVocales[3]++; break;
-                case 'u': conteoVocales[4]++; break;
-            }
-        }
-
-        Console.WriteLine("Conteo de vocales:");
-        Console.WriteLine($"A: {conteoVocales[0]}");
-        Console.WriteLine($"E: {conteoVocales[1]}");
-        Console.WriteLine($"I: {conteoVocales[2]}");
-        Console.WriteLine($"O: {conteoVocales[3]}");
-        Console.WriteLine($"U: {conteoVocales[4]}");
+        ContadorVocales contador = new ContadorVocales(palabra);
+        contador.ContarVocales();
     }
 }

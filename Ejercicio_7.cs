@@ -1,21 +1,42 @@
 using System;
 using System.Collections.Generic;
 
+class Abecedario
+{
+    public List<char> Letras { get; set; }
+
+    public Abecedario()
+    {
+        Letras = new List<char> {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+    }
+
+    public void EliminarPosicionesMultiploDeTres()
+    {
+        for (int i = Letras.Count - 1; i >= 0; i--)
+        {
+            if ((i + 1) % 3 == 0) // Las posiciones son de base 0, por eso sumamos 1
+            {
+                Letras.RemoveAt(i);
+            }
+        }
+    }
+
+    public void MostrarLetras()
+    {
+        foreach (char letra in Letras)
+        {
+            Console.Write(letra + " ");
+        }
+        Console.WriteLine();
+    }
+}
+
 class Program
 {
     static void Main(string[] args)
     {
-        // Almacenar el abecedario en una lista
-        List<char> abecedario = new List<char>("abcdefghijklmnopqrstuvwxyz");
-
-        // Eliminar letras en posiciones múltiplos de 3
-        abecedario.RemoveAll((_, i) => (i + 1) % 3 == 0);
-
-        // Mostrar la lista resultante
-        Console.WriteLine("Abecedario sin posiciones múltiplos de 3:");
-        foreach (char letra in abecedario)
-        {
-            Console.Write(letra + " ");
-        }
+        Abecedario abecedario = new Abecedario();
+        abecedario.EliminarPosicionesMultiploDeTres();
+        abecedario.MostrarLetras();
     }
 }
