@@ -1,0 +1,83 @@
+using System;
+
+public class ListaEnlazada
+{
+    private Nodo cabeza;
+
+    public void Insertar(int dato)
+    {
+        Nodo nuevoNodo = new Nodo(dato);
+        nuevoNodo.Siguiente = cabeza;
+        cabeza = nuevoNodo;
+    }
+
+    public int ContarElemento(int valor)
+    {
+        Nodo actual = cabeza;
+        int contador = 0;
+
+        while (actual != null)
+        {
+            if (actual.Dato == valor)
+                contador++;
+            actual = actual.Siguiente;
+        }
+
+        return contador;
+    }
+
+    public void MostrarMensajeBusqueda(int valor)
+    {
+        int ocurrencias = ContarElemento(valor);
+        if (ocurrencias > 0)
+        {
+            Console.WriteLine($"El valor {valor} aparece {ocurrencias} veces en la lista.");
+        }
+        else
+        {
+            Console.WriteLine($"El valor {valor} no se encuentra en la lista.");
+        }
+    }
+
+    public void Mostrar()
+    {
+        Nodo actual = cabeza;
+        while (actual != null)
+        {
+            Console.Write(actual.Dato + " -> ");
+            actual = actual.Siguiente;
+        }
+        Console.WriteLine("null");
+    }
+}
+
+class Nodo
+{
+    public int Dato;
+    public Nodo Siguiente;
+
+    public Nodo(int dato)
+    {
+        Dato = dato;
+        Siguiente = null;
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        ListaEnlazada lista = new ListaEnlazada();
+        lista.Insertar(5);
+        lista.Insertar(3);
+        lista.Insertar(8);
+        lista.Insertar(3);
+        lista.Insertar(1);
+
+        Console.WriteLine("Lista actual:");
+        lista.Mostrar();
+
+        lista.MostrarMensajeBusqueda(3);
+        lista.MostrarMensajeBusqueda(10);
+    }
+}
